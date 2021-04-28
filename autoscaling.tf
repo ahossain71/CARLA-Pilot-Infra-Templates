@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "carla-pilot-lnchcfg" {
     name_prefix = "carla-pilot-"
     #image_id             = "ami-094d4d00fd7462815"
     image_id              = "ami-0742b4e673072066f"
-    iam_instance_profile = aws_iam_instance_profile.carla-s3-full.name
+    iam_instance_profile = aws_iam_instance_profile.carla-s3-full-profl.name
     security_groups       = [aws_security_group.carla-pilot-lnchcfg-sg.id]
     key_name = "myTestKeyPair02"
     associate_public_ip_address = true
