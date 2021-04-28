@@ -5,8 +5,8 @@ resource "aws_security_group" "carla-pilot-lnchcfg-sg" {
     ingress {
         from_port       = 22
         to_port         = 22
-        protocol        = "ssh"
-        cidr_blocks     = ["10.0.1.0/24","10.0.2.0/24"]
+        protocol        = "tcp"
+        cidr_blocks     = ["0.0.0.0/0"]
     }
     ingress {
         from_port       = 3000
@@ -23,6 +23,27 @@ resource "aws_security_group" "carla-pilot-lnchcfg-sg" {
     tags = {
         Name = "carla-pilot-lnchcfg-sg"
     }
+}
+
+#Security Group for ALB
+resource "aws_security_group" "carla-pilot-lb-sg" {
+  vpc_id      = aws_vpc.carla-pilot-vpc.id
+  name = "carla-pilot-lb-sg"
+  ingress {
+    from_port = 3000
+    to_port = 3000
+    protocol = "tcp"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+        Name = "carla-pilot-lb-sg"
+  } 
 }
 
 #rds postgres security group, would be listening to CARLA-Studio (service) and or Cognisearch system component
@@ -45,26 +66,4 @@ resource "aws_security_group" "carla-pilot-rds-sg" {
     tags = {
         Name = "carla-pilot-rds-sg"
     }
-}
-
-#Security Group for ALB
-resource "aws_security_group" "carla-pilot-lb-sg" {
-  vpc_id      = aws_vpc.carla-pilot-vpc.id
-  name = "carla-pilot-lb-sg"
-  ingress {
-    from_port = 3000
-    to_port = 3000
-    protocol = "tcp"
-    cidr_blocks     = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-        Name = "carla-pilot-lb-sg"
-  }
-  
 }

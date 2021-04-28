@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "carla-pilot-lnchcfg" {
     name_prefix = "carla-pilot-"
     #image_id             = "ami-094d4d00fd7462815"
     image_id              = "ami-0742b4e673072066f"
-    iam_instance_profile = aws_iam_instance_profile.carla-s3-full-profl.name
+    iam_instance_profile  = aws_iam_instance_profile.carla-ec2-s3-profl.name
     security_groups       = [aws_security_group.carla-pilot-lnchcfg-sg.id]
     key_name = "myTestKeyPair02"
     associate_public_ip_address = true
@@ -21,8 +21,8 @@ resource "aws_launch_configuration" "carla-pilot-lnchcfg" {
                             cd ~/
                             sudo mkdir -p /opt/carla-components/CARLA-Pilot /opt/carla-components/CARLA-Studio /opt/carla-components/CARLA-Cognisearch
                             cp /usr/share/dockerimages/CARLA-Pilot-Proto01.tar /opt/carla-components/CARLA-Pilot/
-                            cd /opt/carla-components/CARLA-Pilot/
-                            docker load -i CARLA-Pilot-Proto01.tar
+                            cd ~/opt/carla-components/CARLA-Pilot/
+                            docker load < CARLA-Pilot-Proto01.tar
                             docker run 3000:3000 CARLA-Pilot-Proto01
                             EOF
 }

@@ -25,7 +25,7 @@ resource "aws_db_instance" "carla-pilot-postgresql" {
   engine                   = "postgres"
   engine_version           = "9.6.9"
   identifier               = "carla-pilot-postgresql"
-  instance_class           = "db.t2.micro"
+  instance_class           = "db.t3.micro"
   multi_az                 = false
   name                     = "carlapilotDB"
   #parameter_group_name    = "mydbparamgroup1" # if you have tuned it

@@ -10,11 +10,15 @@ resource "aws_route_table" "carla-pilot-rtbl" {
     }
 }
 
-resource "aws_route_table_association" "carla-pilot-route_table_association-a" {
+resource "aws_route_table_association" "carla-pilot-rtbl-assocA" {
     subnet_id      = aws_subnet.carla-pilot-prv01-sn.id
     route_table_id = aws_route_table.carla-pilot-rtbl.id
 }
-resource "aws_route_table_association" "carla-pilot-route_table_association-b" {
+resource "aws_route_table_association" "carla-pilot-rtbl-assocB" {
     subnet_id      = aws_subnet.carla-pilot-prv02-sn.id
+    route_table_id = aws_route_table.carla-pilot-rtbl.id
+}
+resource "aws_route_table_association" "carla-pilot-rtbl-assocC" {
+    subnet_id      = aws_subnet.carla-pilot-pub-sn.id
     route_table_id = aws_route_table.carla-pilot-rtbl.id
 }
